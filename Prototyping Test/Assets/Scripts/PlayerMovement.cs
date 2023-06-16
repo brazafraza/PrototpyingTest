@@ -43,10 +43,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        //ground check for beanbag
+        if (tag == "Beanbag")
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+            //Debug.Log("My position is" + transform.position);
+        }
 
-      
+       // ground check for beanbag
+        if (tag == "Harvard")
+        {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 1f + 0.4f, whatIsGround);
+        }
+
 
         MyInput();
         SpeedControl();
@@ -55,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
         {
             rb.drag = groundDrag;
-            Debug.Log("is grounded");
+           // Debug.Log("is grounded");
         }
         else
         {

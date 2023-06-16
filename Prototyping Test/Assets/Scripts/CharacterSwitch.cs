@@ -1,28 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+//using Microsoft.Unity.VisualStudio.Editor;
+using Unity.VisualScripting;
+//using UnityEngine.UIElements;
 
 public class CharacterSwitch : MonoBehaviour
 {
     public KeyCode Harvard = KeyCode.Alpha1;
     public KeyCode Beanbag = KeyCode.Alpha2;
 
-    public GameObject BeanbagCGO;
-    public GameObject BeanbagGO;
-    public GameObject BeanbagCam;
+    public GameObject beanbagCamGameObj;
+    public GameObject beanbagGameObj;
+    public GameObject beanbagCam;
 
-    public MoveCamera CGOScript;
-    public PlayerMovement GOScript;
 
-    public GameObject HarvardCGO;
-    public GameObject HarvardGO;
-    public GameObject HarvardCam;
+    public GameObject harvardCamGamObj;
+    public GameObject harvardGameObj;
+    public GameObject harvardCam;
 
-    public MoveCamera HCGOScript;
-    public PlayerMovement HGOScript;
+    public GameObject harvardIcon;
+    public GameObject beanbagIcon;
+
+    public bool isImgOn;
+    public Image img;
+
+
+
     void Start()
     {
-        
+        img.enabled = true;
+        isImgOn = true;
     }
 
     // Update is called once per frame
@@ -32,21 +42,45 @@ public class CharacterSwitch : MonoBehaviour
         {
             Debug.Log("switch to harvard");
             //disabling camera, movement script and camera script on beanbag
-            BeanbagCGO.GetComponent<MoveCamera>().enabled = false;
-            BeanbagGO.GetComponent<PlayerMovement>().enabled = false;
-            BeanbagCam.GetComponent<Camera>().enabled = false;
+            beanbagCamGameObj.GetComponent<MoveCamera>().enabled = false;
+            beanbagGameObj.GetComponent<PlayerMovement>().enabled = false;
+            beanbagCam.GetComponent<Camera>().enabled = false;
 
             //enabling camera, movement script and camera script on harvard
-            HarvardCGO.GetComponent<MoveCamera>().enabled = true;
-            HarvardGO.GetComponent<PlayerMovement>().enabled = true;
-            HarvardCam.GetComponent<Camera>().enabled = true;
+            harvardCamGamObj.GetComponent<MoveCamera>().enabled = true;
+            harvardGameObj.GetComponent<PlayerMovement>().enabled = true;
+            harvardCam.GetComponent<Camera>().enabled = true;
 
+            //display harvard player icon
+            if (isImgOn == true)
+            {
+                img.enabled = false;
+                isImgOn = false;
+            }
         }
 
         if (Input.GetKey(Beanbag))
         {
             Debug.Log("switch to beanbag");
+            //disabling camera, movement script and camera script on beanbag
+            beanbagCamGameObj.GetComponent<MoveCamera>().enabled = true;
+            beanbagGameObj.GetComponent<PlayerMovement>().enabled = true;
+            beanbagCam.GetComponent<Camera>().enabled = true;
+
+            //enabling camera, movement script and camera script on harvard
+            harvardCamGamObj.GetComponent<MoveCamera>().enabled = false;
+            harvardGameObj.GetComponent<PlayerMovement>().enabled = false;
+            harvardCam.GetComponent<Camera>().enabled = false;
+
+            //display beanbag player icon
+            if (isImgOn == false)
+            {
+                img.enabled = true;
+                isImgOn = true;
+            }
         }
+
+       
 
 
     }
