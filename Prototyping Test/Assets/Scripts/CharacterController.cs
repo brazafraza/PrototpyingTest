@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class CharacterController : MonoBehaviour
 {
     public float forwardSpeed = 0.1f;
