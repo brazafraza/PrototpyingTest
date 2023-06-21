@@ -5,38 +5,42 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [Header("Movement")]
+    //movement speed and drag
     public float moveSpeed;
-
     public float groundDrag;
 
+    //jump force, jump cooldown, speed multiplier in the air 
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+
+    //if the player is ready to jump
     bool readyToJump;
 
-    [Header("Keybinds")]
+    //jump keybind
         public KeyCode jumpKey = KeyCode.Space;
 
-    [Header("Ground Check")]
+   //ground check variables
     public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
 
+    //player orientation and inputs
     public Transform orientation;
-
     float horizontalInput;
     float vertcialInput;
 
+    //movement direction 
     Vector3 moveDirection;
 
+    //rigidbody being manipulated
     Rigidbody rb;
 
     private void Start()
     {
 
         readyToJump = true;
-
+        //makign sure rigidbody doesnt fall over due to cylinder
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -47,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         if (tag == "Beanbag")
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-            //Debug.Log("My position is" + transform.position);
+            
         }
 
        // ground check for beanbag
@@ -56,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 1f + 0.4f, whatIsGround);
         }
 
-
+        //calling player input and speed values
         MyInput();
         SpeedControl();
 
@@ -69,10 +73,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.drag = 0;
-        }
-
-
-        
+        }   
     }
 
     private void FixedUpdate()
@@ -90,27 +91,24 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
 
             Jump();
-
+            //resetting jump bool function after cooldown
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
 
     private void MovePlayer()
     {
-
-
-
         //calculating movement direction
         moveDirection = orientation.forward * vertcialInput + orientation.right * horizontalInput;
 
 
-        //on ground
+        //movement on ground
         if (grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
 
-        //in air
+        //movement in air
         else if (!grounded)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
@@ -139,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetJump()
     {
+        //setting jump to true so player can jump again
         readyToJump = true;
     }
 

@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class CharacterController : MonoBehaviour
 {
+    //base values for forces
     public float forwardSpeed = 0.1f;
     public float backwardSpeed = 0.08f;
     public float rotationalSpeed = 2f;
@@ -13,41 +14,12 @@ public class CharacterController : MonoBehaviour
     public float groundCheckDistance;
     public bool isGrounded = true;
 
-
-
-  
-
-
-
     //controls
     public KeyCode forwardsKey = KeyCode.W;
     public KeyCode backwardsKey = KeyCode.S;
     public KeyCode leftKey = KeyCode.A;
     public KeyCode rightKey = KeyCode.D;
     public KeyCode jumpKey = KeyCode.Space;
-
-
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //
-    //    //seeing if player is grounded
-    //    if (other.tag == "Ground")
-    //    {
-    //        isGrounded = true;
-    //        Debug.Log("grounded");
-    //    }
-    //}
-
-    /* void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            isGrounded = false;
-            Debug.Log("not grounded");
-        }
-    } */
-
 
     void Update()
     {
