@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Harvard
   - Beanbag
+  - Col
   layers:
   - Default
   - TransparentFX

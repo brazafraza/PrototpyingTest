@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CollectItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    
+    public int coinsCollected;
+    public TMP_Text numberOfCoins;
+    public TMP_Text numberOfFinalCoins;
+
+    private void OnTriggerEnter(Collider Col)
     {
-        
+        Debug.Log("collected");
+        coinsCollected = coinsCollected + 1;
+        Col.gameObject.SetActive(false);
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        numberOfCoins.text = coinsCollected.ToString();
+        numberOfFinalCoins.text = coinsCollected.ToString();
     }
 }

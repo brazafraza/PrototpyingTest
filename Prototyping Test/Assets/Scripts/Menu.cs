@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public bool isLoaded;
+    
  
 
     public void PlayGame ()
@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
 
     public void ReturnMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
    private void Update()
