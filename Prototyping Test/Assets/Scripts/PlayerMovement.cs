@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     //rigidbody being referenced
     Rigidbody rb;
 
+
     private void Start()
     {
 
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 1f + 0.4f, whatIsGround);
         }
 
-        //calling player input and speed values
+        //calling player input and speed function
         MyInput();
         SpeedControl();
 
